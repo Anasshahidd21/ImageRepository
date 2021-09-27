@@ -4,6 +4,7 @@ import Image from "../../../models/image.model";
 import authenticateToken from "../../authRoute/authentication";
 import { s3 } from "../../../s3";
 import url from "url";
+require("dotenv").config();
 
 /**
  * Endpoint: /delete/all
@@ -18,7 +19,7 @@ router.delete("/all", authenticateToken, async (req, res) => {
       const urls = image.url;
       for (const uri of urls) {
         const pathname = url.parse(uri).pathname.slice(1);
-        var params = { Bucket: "myshopifybucket", Key: pathname };
+        var params = { Bucket: process.env.BUCKET, Key: pathname };
         s3.deleteObject(params, function (err, data) {
           if (err) console.log(err, err.stack);
         });
@@ -46,7 +47,7 @@ router.delete("/:id", authenticateToken, async (req, res) => {
     const urls = image.url;
     for (const uri of urls) {
       const pathname = url.parse(uri).pathname.slice(1);
-      var params = { Bucket: "myshopifybucket", Key: pathname };
+      var params = { Bucket: process.env.BUCKET, Key: pathname };
       s3.deleteObject(params, function (err, data) {
         if (err) console.log(err, err.stack);
       });
