@@ -1,3 +1,5 @@
+## NOTE: MAKE SURE TO FOLLOW STEPS ON RUNNING INSTRUCTIONS [SPECIALLY TO DOWNLOAD ENV FILE]
+
 ## Image Repository
 
 - In this challenge, I created an image repository with the following features:
@@ -13,6 +15,7 @@
 ## Running instructions
 -   Clone the repo
 -   cd shopify
+-   **V IMPORTANT: ** Make sure to add .env file in the root folder [I removed it to not show sensitive information]. You can download it from here: [env](https://drive.google.com/drive/folders/1qsTvZjG3ugx8yY8oAbLX50wIGKWj9LyC?usp=sharing)
 -   run the command `npm install`
 -   run the command `npm run dev`
 -   Wait until the application says `Connected to Database`
