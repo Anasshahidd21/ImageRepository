@@ -1,5 +1,4 @@
 require("dotenv").config();
-import { ACCESS_KEY, SECRET_KEY, S3_BUCKET_REGION } from "./s3details";
 import aws from "aws-sdk";
 import multer from "multer";
 import multerS3 from "multer-s3";
