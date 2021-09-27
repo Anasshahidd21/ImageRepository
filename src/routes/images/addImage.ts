@@ -6,7 +6,6 @@ import {
 import Image from "../../../models/image.model";
 import authenticateToken from "../../authRoute/authentication";
 import upload from "../../../s3";
-import { String } from "aws-sdk/clients/apigateway";
 const router = express.Router();
 
 // Add bulk images
