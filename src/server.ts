@@ -8,17 +8,22 @@ import getImages from "./routes/images/getImage";
 import deleteImage from "./routes/images/deleteImage";
 import addImage from "./routes/images/addImage";
 import authRouter from "./authRoute/authserver";
-import { Grid } from "gridfs-stream";
+
+import bodyParser from "body-parser";
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 
 mongoose.connect(
   "mongodb+srv://admin:admin@cluster0.k1n60.mongodb.net/images?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
-let gfs;
 const db = mongoose.connection;
 db.on("error", (error) => console.error(error));
 db.once("open", () => {
-  gfs = new Grid();
   console.log("Connected to Database");
 });
 
