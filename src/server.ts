@@ -4,11 +4,19 @@ import express from "express";
 const app = express();
 import mongoose from "mongoose";
 
-// import * as addImageRouter from "./routes/addImage";
 import getImages from "./routes/images/getImage";
 import deleteImage from "./routes/images/deleteImage";
 import addImage from "./routes/images/addImage";
 import authRouter from "./authRoute/authserver";
+
+import bodyParser from "body-parser";
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+
 mongoose.connect(
   "mongodb+srv://admin:admin@cluster0.k1n60.mongodb.net/images?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true }

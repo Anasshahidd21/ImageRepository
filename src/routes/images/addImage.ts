@@ -5,36 +5,49 @@ import {
 } from "../../../interfaces/image/imageInterfaces";
 import Image from "../../../models/image.model";
 import authenticateToken from "../../authRoute/authentication";
+import upload from "../../../s3";
+import { String } from "aws-sdk/clients/apigateway";
 const router = express.Router();
 
 // Add bulk images
-router.post("/all", authenticateToken, async (req, res) => {
-  try {
-    const owner = req.body.user;
-    const images = req.body.images;
-    for (const image of images) {
-      const imageDB = new Image({ ...image, owner });
-      await imageDB.save();
-    }
-    res.status(201).json(images);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
+router.post(
+  "/all",
+  upload.array("file", 10),
+  authenticateToken,
+  async (req, res) => {
+    try {
+      const owner: String = req.body.user;
+      const name: String = req.body.name;
+      const url: [String] = (req.files as any).map(
+        (file: { location: any }) => file.location
+      );
+      const permission: ImagePermissions =
+        req.body.permission === "PUBLIC"
+          ? ImagePermissions.PUBLIC
+          : ImagePermissions.PRIVATE;
 
-router.post("/", authenticateToken, async (req, res) => {
+      const imageDB = new Image({ owner, name, url, permission });
+      await imageDB.save();
+      res.status(201).json({ imageDB, message: "Successfully Posted!" });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  }
+);
+
+router.post("/", upload.single("file"), authenticateToken, async (req, res) => {
   try {
-    const owner = req.body.user;
-    const name = req.body.name;
-    const url = req.body.url;
-    const permission = req.body.permission;
+    const owner: String = req.body.user;
+    const name: String = req.body.name;
+    const url: String[] = (req.file as any).location;
+    const permission: String = req.body.permission;
     permission === "PUBLIC"
       ? ImagePermissions.PUBLIC
       : ImagePermissions.PRIVATE;
     const image = new Image({
+      owner,
       name,
       url,
-      owner,
       permission:
         permission === "PUBLIC"
           ? ImagePermissions.PUBLIC
