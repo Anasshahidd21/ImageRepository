@@ -192,3 +192,8 @@ Gets all the public images
 ## Future Improvements 
 -   Testing suite
 -   More comprehensive features like search.
+-   Deploy the app.
+
+## Common code issues
+-   Currently the database urls and aws tokens are exposed, it is because of issues with deployment 
+-   In an ideal world, I'd have shifted them in process.env files.
