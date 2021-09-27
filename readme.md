@@ -1,4 +1,4 @@
-<h1>Image Repository</h1>
+## Image Repository
 
 - In this challenge, I created an image repository with the following features:
   - user Authentication (Signin/Signup)
@@ -8,9 +8,9 @@
   - Deleting single/bulk images.
   - View all public pictures.
 
-<h1>Endpoints with results</h1>
 
-<h1>Running instructions</h1>
+
+## Running instructions
 -   Clone the repo
 -   cd shopify
 -   run the command `npm install`
@@ -18,6 +18,7 @@
 -   Wait until the application says `Connected to Database`
 -   Run the API on Postman.
 
+## Endpoints with results</h1>
 ```
 POST: http://localhost:3000/signup
 
@@ -182,12 +183,12 @@ response: {
 Gets all the public images
 ```
 
-<h1> Technology Used </h1>
+## Technology Used 
 -   Node
 -   Typescript
 -   MongoDB
 -   S3 buckets.
 
-<h1> Future Improvements </h1>
+## Future Improvements 
 -   Testing suite
 -   More comprehensive features like search.
