@@ -5,6 +5,10 @@ const app = express();
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 
+/**
+ * Middleware to authenticate the users before performing any task.
+ * @returns the logged in user as the body of the request | an error.
+ */
 export default function authenticateToken(
   req: Request,
   res: Response,

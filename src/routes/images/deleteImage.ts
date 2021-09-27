@@ -5,7 +5,11 @@ import authenticateToken from "../../authRoute/authentication";
 import { s3 } from "../../../s3";
 import url from "url";
 
-// Get all images
+/**
+ * Endpoint: /delete/all
+ * Endpoint for deleting all the images created by the user.
+ * Authenticates the user before performing any action.
+ */
 router.delete("/all", authenticateToken, async (req, res) => {
   try {
     const owner = req.body.user;
@@ -29,7 +33,11 @@ router.delete("/all", authenticateToken, async (req, res) => {
   }
 });
 
-// get By ID:
+/**
+ * Endpoint: /delete/:id
+ * Endpoint for deleting the images created by the user with a specific id.
+ * Authenticates the user before performing any action.
+ */
 router.delete("/:id", authenticateToken, async (req, res) => {
   try {
     const owner = req.body.user;

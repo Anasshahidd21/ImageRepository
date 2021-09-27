@@ -8,7 +8,11 @@ import authenticateToken from "../../authRoute/authentication";
 import upload from "../../../s3";
 const router = express.Router();
 
-// Add bulk images
+/**
+ * Endpoint: /add/all
+ * Endpoint for uploading an array of images - bulk upload images.
+ * Authenticates the user before performing any action.
+ */
 router.post(
   "/all",
   upload.array("file", 10),
@@ -34,6 +38,11 @@ router.post(
   }
 );
 
+/**
+ * Endpoint: /add/
+ * Endpoint for uploading an array of images - bulk upload images.
+ * Authenticates the user before performing any action.
+ */
 router.post("/", upload.single("file"), authenticateToken, async (req, res) => {
   try {
     const owner: String = req.body.user;
@@ -59,7 +68,11 @@ router.post("/", upload.single("file"), authenticateToken, async (req, res) => {
   }
 });
 
-// update permissions
+/**
+ * Endpoint: /add/:id
+ * Endpoint for updating the permissions of the user.
+ * Authenticates the user before performing any action.
+ */
 router.put("/:id", authenticateToken, async (req, res) => {
   try {
     const owner = req.body.user;
