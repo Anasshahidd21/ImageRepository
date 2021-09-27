@@ -6,6 +6,10 @@ import {
 } from "../interfaces/image/imageInterfaces";
 
 const ImageSchema: Schema = new Schema({
+  owner: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,

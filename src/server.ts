@@ -8,7 +8,7 @@ import mongoose from "mongoose";
 import getImages from "./routes/images/getImage";
 import deleteImage from "./routes/images/deleteImage";
 import addImage from "./routes/images/addImage";
-
+import authRouter from "./authRoute/authserver";
 mongoose.connect(
   "mongodb+srv://admin:admin@cluster0.k1n60.mongodb.net/images?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true }
@@ -21,7 +21,9 @@ db.once("open", () => {
 
 app.use(express.json());
 
+app.use("/get", getImages);
 app.use("/delete", deleteImage);
 app.use("/add", addImage);
+app.use(authRouter);
 
 app.listen(3000, () => console.log("Server Started"));

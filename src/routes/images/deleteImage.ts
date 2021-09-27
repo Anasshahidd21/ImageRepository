@@ -1,9 +1,10 @@
 import express from "express";
 const router = express.Router();
 import Image from "../../../models/image.model";
+import authenticateToken from "../../authRoute/authentication";
 
 // Get all images
-router.delete("/all", async (req, res) => {
+router.delete("/all", authenticateToken, async (req, res) => {
   try {
     const images = await Image.deleteMany({});
     res.status(201).send("Deleted all the images from the repository!");
@@ -13,7 +14,7 @@ router.delete("/all", async (req, res) => {
 });
 
 // get By ID:
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authenticateToken, async (req, res) => {
   try {
     const image = await Image.findById(req.params.id);
     await Image.findByIdAndRemove(req.params.id);
