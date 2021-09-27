@@ -1,20 +1,29 @@
 import express from "express";
+import { ImagePermissions } from "../../../interfaces/image/imageInterfaces";
 const router = express.Router();
 import Image from "../../../models/image.model";
 import authenticateToken from "../../authRoute/authentication";
 
-// Get all images
+/**
+ * Endpoint: /get/
+ * Endpoint for getting all the images that are public.
+ * Authenticates the user before performing any action.
+ */
 router.get("/", authenticateToken, async (req, res) => {
   try {
     const user = req.body.user;
-    const images = await Image.find({ owner: user });
+    const images = await Image.find({ permission: ImagePermissions.PUBLIC });
     res.json(images);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// get By ID:
+/**
+ * Endpoint: /get/:id
+ * Endpoint for getting image with an ID.
+ * Authenticates the user before performing any action.
+ */
 router.get("/:id", authenticateToken, async (req, res) => {
   try {
     const image = await Image.findOne({

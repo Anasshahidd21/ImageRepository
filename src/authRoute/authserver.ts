@@ -6,6 +6,10 @@ import { IUser } from "../../interfaces/user/userInterface";
 
 const router = express.Router();
 
+/**
+ * Endpoint to login user
+ * This is one of the first entry points, because non-authorized users can't do anything.
+ */
 router.post("/login", async (req, res) => {
   // Authenticate User
   const username = req.body.username;
@@ -30,6 +34,10 @@ router.post("/login", async (req, res) => {
   res.json({ accessToken, message: "Successfully Authenticated!" });
 });
 
+/**
+ * Endpoint for user signup, if they don't exist in the system.
+ * Only unique usernames are added, duplicacy is not allowed(used as primary)
+ */
 router.post("/signup", async (req, res) => {
   try {
     const username = req.body.username;
@@ -49,6 +57,11 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+/**
+ * Utility function to assign a token to the user.
+ * @param user username of the user.
+ * @returns a signed access token.
+ */
 function generateAccessToken(user: string) {
   return jwt.sign(user, "secret_key");
 }
