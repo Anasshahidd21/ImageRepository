@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import User from "../../models/user.model";
 import { IUser } from "../../interfaces/user/userInterface";
+require("dotenv").config();
 
 const router = express.Router();
 
@@ -63,7 +64,7 @@ router.post("/signup", async (req, res) => {
  * @returns a signed access token.
  */
 function generateAccessToken(user: string) {
-  return jwt.sign(user, "secret_key");
+  return jwt.sign(user, process.env.JWT_SECRET);
 }
 
 export default router;

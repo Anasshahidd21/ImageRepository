@@ -17,10 +17,10 @@ app.use(
   })
 );
 
-mongoose.connect(
-  "mongodb+srv://admin:admin@cluster0.k1n60.mongodb.net/images?retryWrites=true&w=majority",
-  { useNewUrlParser: true, useUnifiedTopology: true }
-);
+mongoose.connect(process.env.DATABASE_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 const db = mongoose.connection;
 db.on("error", (error) => console.error(error));
 db.once("open", () => {
@@ -34,4 +34,4 @@ app.use("/delete", deleteImage);
 app.use("/add", addImage);
 app.use(authRouter);
 
-app.listen(3000, () => console.log("Server Started"));
+app.listen(process.env.PORT || 3000, () => console.log("Server Started"));
