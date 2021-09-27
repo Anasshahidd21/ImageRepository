@@ -2,6 +2,7 @@ require("dotenv").config();
 import aws from "aws-sdk";
 import multer from "multer";
 import multerS3 from "multer-s3";
+import shortid from "shortid";
 
 export const s3 = new aws.S3({
   accessKeyId: process.env.ACCESS_KEY,
@@ -31,7 +32,7 @@ const upload = multer({
       cb(null, { fieldName: "TESTING_METADATA" });
     },
     key: function (req, file, cb) {
-      cb(null, `image-${Date.now()}.jpeg`);
+      cb(null, `image-${shortid.generate()}${Date.now()}.jpeg`);
     },
   }),
 });

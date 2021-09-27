@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server.ts",
     "build": "rimraf ./dist && tsc --build"
+    "test": "jest",
   },
   "keywords": [],
   "author": "",
@@ -17,11 +17,15 @@
     "bcrypt": "^5.0.1",
     "express": "^4.17.1",
     "gridfs-stream": "^1.1.1",
+    "jest": "^27.2.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.7",
     "multer": "^1.4.3",
     "multer-gridfs-storage": "^5.0.1",
-    "multer-s3": "^2.9.0"
+    "multer-s3": "^2.9.0",
+    "shortid": "^2.2.16",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
   },
   "devDependencies": {
     "@aws-sdk/types": "^3.34.0",
@@ -32,6 +36,7 @@
     "@types/multer": "^1.4.7",
     "@types/multer-gridfs-storage": "^4.0.4",
     "@types/node": "^16.10.1",
+    "@types/shortid": "0.0.29",
     "dotenv": "^10.0.0",
     "nodemon": "^2.0.13"
   }
